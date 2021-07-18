@@ -150,7 +150,7 @@
                 </div>
               </div>
             </div>
-            <b-alert :show="fileSize > 5" variant="danger">Your uploaded {{fileSize}}mb: max siz is 5mb</b-alert>
+            <b-alert :show="fileSize > 5120" variant="danger">Your uploaded {{fileSize}}mb: max siz is 5mb</b-alert>
           </b-form-group>
         </div>
       </div>
@@ -179,10 +179,10 @@ export default {
       if(this.files.length) {
         document.querySelector('.input-placeholder').style.display = 'none';
       }
-     this.$refs.preview.innerHTML = '';
-     this.fileSize = 0
+      this.$refs.preview.innerHTML = '';
+      this.fileSize = 0
       Array.from(this.files).forEach((file, idx) => {
-        this.fileSize += file.size/1024;
+        this.fileSize += (file.size/1048576).toFixed(1);
         var image = file
         var reader = new FileReader();
         reader.onload = (file) => {
